@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            padding: 30px;
+            background: white;
+        }
+        h1 {
+            text-align: left;
+        }
+        button {
+            color: white;
+            background-color: pink;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+        }
+        button:hover {
+            text-decoration: underline;
+            color: palevioletred;
+        }
+        button, div {
+            margin-left: 15%;
+            font-size: 20px;
+            padding: 10px;
+        }
+    </style>
+    <script type="module" src="./homepage.js"></script>
+</head>
+<body>
+    <h1>Welcome to Your Home Page</h1>
+    <div>First Name: <span id="loggedUserFname"></span></div>
+    <div>Last Name: <span id="loggedUserLname"></span></div>
+    <div>Email: <span id="loggedUserEmail"></span></div>
+    <button id="logout">Logout</button> <!-- Added a label for logout -->
+</body>
+</html>
