@@ -1,43 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <style>
-        body {
-            padding: 30px;
-            background: white;
-        }
-        h1 {
-            text-align: left;
-        }
-        button {
-            color: white;
-            background-color: pink;
-            padding: 5px;
-            border-radius: 5px;
-            font-size: 1rem;
-            font-weight: bold;
-            border: none;
-        }
-        button:hover {
-            text-decoration: underline;
-            color: palevioletred;
-        }
-        button, div {
-            margin-left: 15%;
-            font-size: 20px;
-            padding: 10px;
-        }
-    </style>
-    <script type="module" src="./homepage.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home & Face Analysis</title>
+
+  <style>
+    body {
+      padding: 30px;
+      background: white;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    h2 {
+      margin-left: 15%;
+    }
+
+    button {
+      color: white;
+      background-color: pink;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      text-decoration: underline;
+      color: palevioletred;
+    }
+
+    #buttons {
+      display: flex;
+      justify-content: space-between;
+      width: 60%;
+      margin: 20px auto;
+    }
+
+    #uploadedImage, #hairstyleOptions {
+      margin-left: 15%;
+    }
+
+    img {
+      max-width: 300px;
+      height: auto;
+    }
+
+    .hairstyle-option {
+      width: 200px;
+      height: auto;
+      margin: 10px;
+    }
+
+    #hairstyleOptions {
+      display: flex;
+      justify-content: space-around;
+      width: 70%;
+      margin: 20px auto;
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to Your Home Page</h1>
-    <div>First Name: <span id="loggedUserFname"></span></div>
-    <div>Last Name: <span id="loggedUserLname"></span></div>
-    <div>Email: <span id="loggedUserEmail"></span></div>
-    <button id="logout">Logout</button> <!-- Added a label for logout -->
+
+  <!-- Home Page Section -->
+  <h1>Welcome to Your Home Page</h1>
+
+  <!-- Face Analysis Section -->
+  <h2>Start Your Face Analysis Journey</h2>
+  <p style="margin-left: 15%;">Discover the perfect hairstyle tailored for you. Let's begin!</p>
+
+  <div id="buttons">
+    <!-- Upload Picture Option -->
+    <button id="uploadBtn">Upload Your Picture</button>
+    
+    <!-- Take Live Photo Option -->
+    <button id="livePhotoBtn">Take a Live Photo</button>
+  </div>
+
+  <!-- Image Upload -->
+  <form id="hairstyleForm" style="display: none;">
+    <label for="imageUpload" style="margin-left: 15%;">Upload Your Image:</label>
+    <input type="file" id="imageUpload" accept="image/*"><br><br>
+
+    <!-- Hairstyle Category Selection -->
+    <label for="category" style="margin-left: 15%;">Choose Hairstyle Type:</label>
+    <select id="category" style="margin-left: 15%;">
+      <option value="short">Short</option>
+      <option value="medium">Medium</option>
+      <option value="long">Long</option>
+    </select><br><br>
+
+    <button type="button" id="submitBtn" style="margin-left: 15%;">Submit</button>
+  </form>
+
+  <!-- Display Uploaded Image -->
+  <h2>Uploaded Image:</h2>
+  <img id="uploadedImage" alt="Your image will appear here"><br><br>
+
+  <!-- Display Hairstyle Options -->
+  <h2>Hairstyle Suggestions:</h2>
+  <div id="hairstyleOptions"></div>
+
+  <script type="module" src="./homepage.js"></script>
+  <script src="script.js"></script>
+
+  <script>
+    // Toggle between upload and live photo options
+    document.getElementById('uploadBtn').addEventListener('click', function() {
+      document.getElementById('hairstyleForm').style.display = 'block';
+    });
+
+    document.getElementById('livePhotoBtn').addEventListener('click', function() {
+      alert('Live photo feature is not implemented yet.');
+      // Add functionality for capturing live photo here.
+    });
+
+    // Handle the image upload and hairstyle selection
+    document.getElementById('submitBtn').addEventListener('click', function() {
+      const uploadedImage = document.getElementById('imageUpload').files[0];
+      const category = document.getElementById('category').value;
+
+      if (!uploadedImage) {
+        alert('Please upload an image.');
+        return;
+      }
+
+      // Simulate displaying the uploaded image (if needed)
+      const imageUrl = URL.createObjectURL(uploadedImage);
+      document.getElementById('uploadedImage').src = imageUrl;
+
+      // Show hairstyle options based on selected category
+      const hairstyleOptionsDiv = document.getElementById('hairstyleOptions');
+      hairstyleOptionsDiv.innerHTML = ''; // Clear previous options
+
+      // Simulate different hairstyle images for each category
+      const hairstyleImages = {
+        short: ['short1.jpg', 'short2.jpg', 'short3.jpg'],
+        medium: ['medium1.jpg', 'medium2.jpg', 'medium3.jpg'],
+        long: ['long1.jpg', 'long2.jpg', 'long3.jpg']
+      };
+
+      hairstyleImages[category].forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = category + ' hairstyle';
+        img.className = 'hairstyle-option';
+        hairstyleOptionsDiv.appendChild(img);
+      });
+    });
+  </script>
+
 </body>
 </html>
